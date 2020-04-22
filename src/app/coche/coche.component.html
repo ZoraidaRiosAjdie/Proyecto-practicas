@@ -1,0 +1,12 @@
+<div *ngIf = "id">
+    Id del coche : {{id}}
+</div>
+<p>coche works!</p>
+<div *ngIf="!id">
+    <div *ngFor = "let coche of Coche">
+        <h5>{{coche.name}}</h5>
+        <p>{{coche.descripcion}}</p>
+        <a [routerLink]="['/coche/', coche.id]">Check product</a>
+    </div>
+</div>
+

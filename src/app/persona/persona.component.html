@@ -1,0 +1,108 @@
+<h1>Repaso Angular</h1>
+<h3>Lista de personas con *ngFor</h3>
+<ul>
+    <li *ngFor="let persona of personas">
+        {{persona.nombre}}
+        <ul>
+            <li>{{persona.edad}}</li>
+            <li>{{persona.sexo}}</li>
+        </ul>
+    </li>
+</ul>
+<h3>*ngFor</h3>
+<ul>
+    <li *ngFor="let empleado of personas">
+        Empleados:
+        <ul>
+            <li>{{empleado.nombre}}</li>
+            <li>{{empleado.edad}}</li>
+            <li>{{empleado.sexo}}</li>
+            <li *ngIf="persona.contratado == true">Esta contratado</li>
+            <li *ngIf="persona.contratado == false">No esta contratado</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>*ngIf</h3>
+<ul *ngIf = "trabajadorExtranjero == true">
+    <li>{{persona.nombre}}</li>
+    <li>{{persona.edad}}</li>
+    <li>{{persona.sexo}}</li>
+</ul>
+<ul *ngIf = "trabajadorExtranjero == false">
+    <li>{{persona.nombre}}</li>
+    <li>{{persona.edad}}</li>
+    <li>{{persona.sexo}}</li>
+</ul>
+<h3>Evento click</h3>
+<div *ngIf='trabajadorExtranjero == true'>
+    <button (click)="cambiarExterno(false)">Mostrar trabajador extranjero</button>
+    <ul>
+        <li>{{personas[0].nombre}}</li>
+        <li>{{personas[0].edad}}</li>
+        <li>{{personas[0].sexo}}</li>
+    </ul>
+</div>
+<div *ngIf='trabajadorExtranjero == false'>
+    <button (click)="cambiarExterno(true)">Mostrar trabajador extranjero</button>
+    <ul>
+        <li>{{personas[0].nombre}}</li>
+        <li>{{personas[0].edad}}</li>
+        <li>{{personas[0].sexo}}</li>
+    </ul>
+</div>
+<h3>ngSwitch</h3>
+<ul [ngSwitch]="color">
+    <li *ngSwitchCase="'red'" [ngStyle]="{background:color}">Es rojo</li>
+    <li *ngSwitchCase="'blue'">Es azul</li>
+</ul>
+<h3>ngStyle</h3>
+<ul [ngSwitch]="color">
+    <li *ngSwitchCase="'red'" [ngStyle]="{
+        'background':color, 
+        'color':'white',
+        'padding':'20px'
+    }">Es rojo</li>
+    <li *ngSwitchCase="'blue'" [ngStyle]="{
+        'background':color, 
+        'color':'white',
+        'padding':'20px'
+    }">Es azul</li>
+</ul>
+<h3>NgModel</h3>
+<input type="text" [(ngModel)]="color_seleccionado">
+<div  [ngStyle]="{
+    'background': color_seleccionado,
+    'width':'200px',
+    'height':'200px',
+    'float':'right'
+}">
+</div>
+<div style="clear:both"></div>
+<pre [style.border]="color_seleccionado=='red' ? '5px solid black':'5px solid grey'">
+    <strong>Color elegido:</strong>
+    {{color_seleccionado}}
+</pre>
+<h3>NgClass</h3>
+<pre [ngClass]="{
+    backBlue: color_seleccionado == 'blue',
+    backGeen: color_seleccionado == 'green'
+}">
+    <strong>Color elegido:</strong>
+    {{color_seleccionado}}
+</pre>
+<pre [ngClass]="['backBlue','borderGreen']">
+    <strong>Color elegido:</strong>
+    {{color_seleccionado}}
+</pre>
+<!-- <h3>NgTemplate</h3>
+<div *ngIf="people.length > 0 else nopeople"></div>
+<ng-template #nopeople>
+    <div>No es una persona</div>
+</ng-template>
+<h3>NgContainer</h3>
+<ng-container *ngIf="personas.length > 0 else nopeople">
+    <div *ngFor ="let persona of personas">
+        {{persona.nombre}}
+    </div>
+</ng-container> -->

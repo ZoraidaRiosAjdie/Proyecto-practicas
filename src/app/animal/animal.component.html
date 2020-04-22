@@ -1,0 +1,25 @@
+<!-- Rutas con párametros -->
+<h3>Rutas con parametros</h3>
+<div *ngFor ="let animal of Animales">
+    <h5>{{animal.nombre}}</h5>
+    <p>{{animal.edad}}</p>
+    <p>{{animal.raza}}</p>
+    <a [routerLink]="['/animal/',animal.nombre]">Check Product</a>
+</div>
+<h3>Comprobación de ruta</h3>
+<div *ngIf = "nombre">
+    Nombre del animal : {{nombre}}
+</div>
+<p>animal works!</p>
+<div *ngIf="!nombre">
+    <div *ngFor = "let animal of Animales">
+        <h5>{{animal.nombre}}</h5>
+        <p>{{animal.raza}}</p>
+        <a [routerLink]="['/animal/', animal.nombre]">Check product</a>
+    </div>
+</div>
+<h3>Redirección</h3>
+<div *ngIf = "nombre">
+    Nombre del animal: {{nombre}}
+    <button (click)='onBack()'>Volver</button>
+</div>  

@@ -1,0 +1,10 @@
+.backBlue{
+    background: lightblue;
+}
+.backGeen{
+    background: green;
+}
+.borderGreen{
+    border-color: green;
+    border-style: solid;
+}

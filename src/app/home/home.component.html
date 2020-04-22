@@ -1,0 +1,7 @@
+<h1>Lista de ropa</h1>
+<input type="text" [(ngModel)]="nombrePrenda"/>
+<button (click)="ropa_seleccionada(nombrePrenda)">Cambiar</button>
+<ul *ngFor = "let ropa of mostrar; let i">
+    <li>{{ropa}}</li>
+    <button (click)="delete(i + 1)">Borrar</button>
+</ul>
