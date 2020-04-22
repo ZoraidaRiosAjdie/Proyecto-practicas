@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PersonaComponent } from './Components/persona/persona.component';
 import { AnimalComponent } from './Components/animal/animal.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './Components/home/home.component';
 import { CocheComponent } from './Components/coche/coche.component';
 import { DiscosComponent } from './Components/discos/discos.component';
 
