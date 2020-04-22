@@ -1,3 +1,4 @@
+<!-- Rutas -->
 <div *ngIf = "id">
     Id del coche : {{id}}
 </div>
@@ -9,4 +10,15 @@
         <a [routerLink]="['/coche/', coche.id]">Check product</a>
     </div>
 </div>
-
+<!-- Formularios -->
+<!-- ngModel -->
+<h1>Componentes de coche</h1>
+<form #formCoche="ngForm" (ngSubmit)="onSubmit()">
+    <label>Nombre</label>
+    <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="coche.nombre" required><br>
+    <span *ngIf="nombre.touched && !nombre.valid">Es nombre no puede estar vacio</span><br>
+    <label>Matricula</label>
+    <input type="text" name="matricula" #matricula="ngModel" [(ngModel)]="coche.matricula" required><br>
+    <span *ngIf="matricula.touched && !matricula.valid">Es matricula no puede estar vacio</span><br>
+    <input type="submit" value="Guardar">
+</form>

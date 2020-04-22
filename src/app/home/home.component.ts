@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RopaService } from '../servicios/ropa.service'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
