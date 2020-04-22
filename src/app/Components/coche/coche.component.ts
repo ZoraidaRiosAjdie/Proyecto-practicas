@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute}  from '@angular/router';
-import { PeticionesService } from '../servicios/peticiones.service';
+import { PeticionesService } from '../../servicios/peticiones.service';
 import { Coche } from './coche';
 
 //import { threadId } from 'worker_threads';

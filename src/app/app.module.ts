@@ -8,11 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 /*Modulo para componentes */
 import { AppComponent } from './app.component';
-import { PersonaComponent } from './persona/persona.component';
-import { AnimalComponent } from './animal/animal.component';
+import { PersonaComponent } from './Components/persona/persona.component';
+import { AnimalComponent } from './Components/animal/animal.component';
 import { HomeComponent } from './home/home.component';
-import { CocheComponent } from './coche/coche.component';
-import { DiscosComponent } from './discos/discos.component';
+import { CocheComponent } from './Components/coche/coche.component';
+import { DiscosComponent } from './Components/discos/discos.component';
 
 @NgModule({
   declarations: [

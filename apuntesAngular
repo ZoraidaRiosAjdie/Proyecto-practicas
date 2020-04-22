@@ -1,0 +1,172 @@
+Estrcutura de angular
+-Ficheros de angular
+    *index.html: Es el primer fichero que se ejecuta, 
+    contiene la cabecera con las importaciones e inicia 
+    el contenido principal de la aplicación.
+    *styles.css: Los estilos principales de la aplicación.
+    *app/app.component.ts: El primer componente que se 
+    ejecuta tras el index.html
+    *app/app.module.ts: Indica al sistema el conjunto de 
+    ficheros que se tendrán en cuenta en la aplicación y 
+    deben estar disponibles.
+-Organización de carpetas por tipos
+    *Interfaces: Estos elementos nos ayudan en typescript a
+    la hora de interactuar con objetos.
+    *Components: Los componentes de nuestra aplicación,
+    todo aquello que se pueda usar como tal.
+    *Services: Incluiremos los ficheros para tratar con 
+    servicios web, pero también los que necesitemos para 
+    interconectar otros componentes o extraer código. 
+    Este tipo de ficheros (services) serán los que 
+    contengan la lógica de la aplicación.
+    *Views: Para mejorar la clasificación de ficheros, 
+    aquí deberías incluir todos aquellos componentes que 
+    componen las vistas de nuestra aplicación, y en ellos 
+    importar nuestros componentes.
+    *Menu: Al igual que las vistas, es una buena opción 
+    incluir aquí los componentes que componen el menú de 
+    la aplicación
+
+Componentes de Angular 8
+    Un componente en Angular es una combinación de un archivo 
+    html con un ts y algunas veces scss para crear un elemento 
+    con caracteristicas propias tanto de comportamiento como de 
+    apariencia que se puede mostrar en un navegador.
+    Podemos usar el siguiente comando para generar un 
+    componente:
+        $ ng generate component <nombre> [opciones]
+    Simplificado en:
+        $ ng g c <nombre> [opciones]
+
+Directivas 
+-Introducción
+    *   {{ variable }} : Nos sirve para mostrar el contenido 
+    de una variable.
+    *   [(ngModel)] : Para enlazar variables a elementos 
+    del DOM, como a un input.
+    *   ( event ) :  Para capturar y asignar a funciones 
+    eventos disparados en los templates, como el evento 
+    click, básico para cualquier objetivo.
+    *   <app-component></app-component> : Las directivas 
+    para los componentes.
+    *   [ variable ] : Para incluir información a 
+    componentes.
+    *   *ngFor o *ngIf que nos servirán como if y for, los 
+    veremos en profundidad a continuación.
+-Directivas estructurales
+*NgIf
+    Nos permite decidir sobre la existencia de elementos y 
+    componentes. Funciona igual que la instrucción if en 
+    typescript y espera una variable tipo boolean que será 
+    evaluado.
+    *NgFor
+    Lo usaremos normalmente para generar contenido de 
+    forma dinámica.
+*ngFor=”let correo of listaCorreos”
+    Recorremos la lista de correos como cualquier función 
+    iteradora, acepta elementos iterables.
+    *ngFor=”let correo of listaCorreos; index as i;”
+    Recorremos y además podemos tener referencia de la cuenta 
+    del for.
+    Ejemplo:
+    <div *ngFor="let correo of listaCorreos; index as i;">
+        <p> {{ correo.titulo }} <span>Número {{ i }}</span></p>
+        <p> {{ correo.cuerpo }} </p>
+    </div>
+-NgModel
+    Básicamente se trata de un enlace, entre algo que tienes 
+    en la definición del componente con un campo de formulario 
+    del template (vista) del componente.
+    Por ejemplo, tenemos un componente llamado "cuadrado", 
+    que declara una propiedad llamada "lado". La class del 
+    componente podría quedar así:
+        export class CuadradoComponent {
+            lado = 4;
+        }
+    Si queremos que ese valor "lado" se vuelque dentro de un 
+    campo INPUT de formulario, tendríamos que usar algo como 
+    esto.
+        <input type="number" [ngModel]="lado">
+    Estamos usando la directiva ngModel como si fuera una 
+    propiedad del campo INPUT, asignándole el valor que tenemos 
+    declarado en el componente.
+-Formularios reactivos
+    *   Más flexible, pero necesita mucha práctica.
+    *   Adecuado en escenarios complejos
+    *   No se realiza ningún data binding
+    *   Más código de componente y menos marcado HTML
+    *   Se pueden hacer transformaciones reactivas tales como
+    *   Adición de elementos dinámicamente
+-Formularios desde template
+    *   Fácil de usar
+    *   Adecuado para escenarios simples.
+    *   Two way data binding (usando [(NgModel)] syntax)
+    *   Código de componente mínimo
+    *   Test unitarios difíciles de implementar
+
+Relaciones entre componentes
+-Observables Rxjs
+    Definición de un observable
+        Los observables brindan soporte para pasar mensajes entre 
+        partes de su aplicación. Se usan con frecuencia en Angular 
+        y son la técnica recomendada para el manejo de eventos, la 
+        programación asincrónica y el manejo de múltiples valores.
+        Es común usar en el nombre de estos, el símbolo $ para 
+        dejar claro que tipo de dato se trata.
+            myObservable$ = Observable<any[]>;
+        Podemos construir un observable fácilmente con un array de 
+        números:
+            myObservable$ = of(1, 2, 3);
+    Suscripciones
+        Como se ha visto, los observables son un tipo de 
+        dato, una funcionalidad de estos tipos es la de 
+        suscribirse indicando qué queremos hacer cuando el 
+        observable “cambie”.
+        Para ello debemos indicarle que hacer mediante 
+        funciones, al suscribirnos nos permite indicar 3 
+        funciones.
+        La primera es obligatoria y será la que se ejecute 
+        cuando el observable emita un “cambio”.
+        Las siguientes funciones son para indicar qué hacer 
+        en caso de error y la última es la que se ejecuta 
+        cuando se finaliza el observable. Veamos un ejemplo 
+        completo.
+            myObservable$.subscribe(
+            (datos) => {
+                // acción al recibir datos
+            },
+            (error) => {
+                // acción solo para el caso de error
+            },
+            () => {
+                // acción al finalizar
+            }
+            );
+    Terminar suscripción
+        Más adelante veremos el ciclo de vida de los 
+        componentes de angular, pero una cosa que importante 
+        saber en este punto, es que cuando nos suscribimos a 
+        un observable, siempre debemos cerrar la suscripción 
+        al terminar, de lo contrario se mantendrá activa y 
+        generará errores.
+        Para ello solo debemos usar lo siguiente:
+            const mySubscription = myObservable$.subscribe();
+            if(!mySubscription.closed){
+            mySubscription.unsubscribe();
+            }
+    Servicios
+        *   Los servicios son clases con un objetivo 
+        determinado que facilitan la reutilización de 
+        código.
+        *   Se utilizan para implementar la parte de 
+        recogida y envío de datos, es decir, se recomienda 
+        que los componentes no traten con la comunicación 
+        con servidores o datos directamente sino que lo 
+        mejor es delegar esta funcionalidad a los servicios.
+        *   Inyección de Dependencias (Dependency Injection 
+        o DI) es un patrón de diseño en el que una clase 
+        requiere instancias de una o más clases y en vez de 
+        generarlas dentro de su propio constructor, las 
+        recibe ya instanciadas por un mecanismo externo.
+
+    
