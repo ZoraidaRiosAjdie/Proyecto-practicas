@@ -1,5 +1,5 @@
 <!-- Rutas con párametros -->
-<h3>Rutas con parametros</h3>
+<!-- <h3>Rutas con parametros</h3>
 <div *ngFor ="let animal of Animales">
     <h5>{{animal.nombre}}</h5>
     <p>{{animal.edad}}</p>
@@ -22,4 +22,22 @@
 <div *ngIf = "nombre">
     Nombre del animal: {{nombre}}
     <button (click)='onBack()'>Volver</button>
-</div>  
+</div>   -->
+<h3>HTTP</h3>
+{{datos1.kind}}
+<ul>
+    <li *ngFor="let dato of datos">
+        {{dato.kind}}
+        <!-- <ul>
+            <li *ngFor="let items of dato.items">
+                <ul>
+                    <li *ngFor="let volumeInfo of items.volumeInfo">
+                        {{volumeInfo.title}}
+                    </li>
+                </ul>
+            </li>
+        </ul> -->
+    </li>
+</ul>
+
+
