@@ -1,40 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { DiagramModule, MindMapService, DataBindingService, BpmnDiagramsService } from '@syncfusion/ej2-angular-diagrams';
 import { NgModule } from '@angular/core';
-/*Mosulo para formularios */
-import {FormsModule , ReactiveFormsModule} from '@angular/forms';
-/*Modulos para rutas*/
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
-/*Modulo para peticiones http*/
-import {HttpClientModule} from '@angular/common/http';
-/*Modulo para componentes */
 import { AppComponent } from './app.component';
-import { PersonaComponent } from './persona/persona.component';
-import { AnimalComponent } from './animal/animal.component';
-import { HomeComponent } from './home/home.component';
-import { CocheComponent } from './coche/coche.component';
-import { DiscosComponent } from './discos/discos.component';
+import { DrgComponent } from './drg/drg.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    /*declaracion de componentes*/
-    PersonaComponent,
-    AnimalComponent,
-    HomeComponent,
-    CocheComponent,
-    DiscosComponent
+    DrgComponent
   ],
   imports: [
     BrowserModule,
-    /*Import para rutas */
+    DiagramModule,
     AppRoutingModule,
-    /*Imports para formulario */
-    FormsModule,
-    ReactiveFormsModule,
-    /*Import de peticiones http */
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
+    
+    //HttpModule
+    
   ],
-  providers: [],
+  providers: [MindMapService,DataBindingService,BpmnDiagramsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
