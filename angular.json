@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Diagrama"
+    }
+  },
+  "defaultProject": "Diagrama",
+  "cli": {
+    "analytics": "8dc2c3ce-99a5-431b-84c5-3da3c7620753"
+  }
 }

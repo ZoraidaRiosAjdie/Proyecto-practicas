@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools } from '@syncfusion/ej2-diagrams';
-import { DataManager } from '@syncfusion/ej2-data';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { DiagramComponent, Diagram, NodeModel, ConnectorModel } from '@syncfusion/ej2-angular-diagrams';
 import { PeticionService} from '../peticion.service';
 
 /*let species: object[] = [
@@ -40,48 +39,26 @@ let codes: object[]  = [{
   encapsulation: ViewEncapsulation.None
 })
 export class PrincipalComponent {
-    constructor( private _peticionService: PeticionService ){
-
+    @ViewChild("diagram")
+    public diagram: DiagramComponent;
+    public getNodeDefaults(node: NodeModel): NodeModel {
+        node.height = 100;
+        node.width = 100;
+        node.style.fill = "#6BA5D7";
+        node.style.strokeColor = "White";
+        return node;
     }
-    public node: NodeModel;
-    public nodeDefaults(node: NodeModel): NodeModel {
-        let obj: NodeModel = {};
-        obj.shape = { type: 'Basic', shape: 'Rectangle' };
-        obj.style = { 
-                      strokeWidth: 1 ,
-                      fill: 'darkcyan'
-                    };
-        obj.width = 95;
-        obj.height = 30;
-        return obj;
-    };
-    public data: Object = {
-        id: 'Name', parentId: 'Category',  dataManager: new DataManager(this._peticionService.json()),
-        //binds the external data with node
-        doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
-            nodeModel.annotations = [{
-                /* tslint:disable:no-string-literal */
-                content: data['Name'], 
-                style: { color: 'black' }
-            }];
-            /* tslint:disable:no-string-literal */
-            //nodeModel.style = { fill: '#ffeec7', strokeColor: '#f5d897', strokeWidth: 1 };
+    public getConnectorDefaults(obj: ConnectorModel): ConnectorModel {
+        obj.style = {
+            strokeColor: '#6BA5D7',
+            fill: '#6BA5D7',
+            strokeWidth: 2
         }
-    };
-
-    public connDefaults(connector: ConnectorModel): void {
-        connector.type = 'Orthogonal';
-        connector.style.strokeColor = '#4d4d4d';
-        connector.targetDecorator.shape = 'None';
-    };
-
-    public tool: DiagramTools = DiagramTools.ZoomPan;
-    public snapSettings: SnapSettingsModel = { constraints: SnapConstraints.None };
-    public layout: Object = {
-        type: 'HierarchicalTree', horizontalSpacing: 40, verticalSpacing: 40,
-        margin: { top: 10, left: 10, right: 10, bottom: 0 }
-    };
-}
-export interface DataInfo {
-    [key: string]: string;
+        obj.targetDecorator = {
+            style: {
+                fill: '#6BA5D7',
+                strokeColor: '#6BA5D7'
+            }
+        }
+    }
 }
