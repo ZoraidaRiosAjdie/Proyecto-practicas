@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { DiagramModule, HierarchicalTreeService, DataBindingService } from '@syncfusion/ej2-angular-diagrams';
+import { DiagramModule, HierarchicalTreeService, DataBindingService, MindMapService } from '@syncfusion/ej2-angular-diagrams';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,6 @@ import { PrincipalComponent } from './principal/principal.component';
     ],
     declarations: [AppComponent, PrincipalComponent, DrgComponent],
     bootstrap: [AppComponent],
-    providers: [ HierarchicalTreeService,DataBindingService ],
+    providers: [ HierarchicalTreeService,DataBindingService,MindMapService ],
 })
 export class AppModule { }

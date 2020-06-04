@@ -1,20 +1,96 @@
-<ejs-diagram #diagram id="diagram" width="100%" height="580px" [getNodeDefaults] ='getNodeDefaults' [getConnectorDefaults] ='getConnectorDefaults'>
+<!--<ejs-diagram #diagram id="diagram" width="100%" height="490px" [getConnectorDefaults]='connDefaults' [getNodeDefaults]='nodeDefaults' [tool]='tool' [layout]='layout' [dataSourceSettings]='data' [snapSettings]='snapSettings'>
+</ejs-diagram>-->
+
+<!--<ejs-diagram 
+    id="diagram" 
+    width="100%" 
+    height="680px" 
+    [layout]='layout' 
+    [dataSourceSettings]='dataSourceSettings' 
+    [getNodeDefaults]='nodeDefaults' 
+    [getConnectorDefaults]='connectorDefaults'
+    >
+</ejs-diagram>-->
+<!--
+    <ejs-diagram 
+    #diagram 
+    id="diagram"
+    width="100%"
+    height="580px" 
+    [getNodeDefaults]="getNodeDefaults" 
+    [getConnectorDefaults]="getConnectorDefaults" 
+    [snapSettings]="snapSettings" 
+    [layout]="layout" 
+    [dataSourceSettings]="dataSourceSettings">
+    </ejs-diagram>
+-->
+<!--
+    <ejs-diagram #diagram id="diagram" width="100%" height="580px" [getNodeDefaults] ='getNodeDefaults'>
+        <e-nodes>
+            <e-node id='node1' [offsetX]=150 [offsetY]=150>
+                <e-node-annotations>
+                    <e-node-annotation content="Farm">
+                    </e-node-annotation>
+                </e-node-annotations>
+            </e-node>
+            <e-node id='node2' [offsetX]=350 [offsetY]=150>
+                <e-node-annotations>
+                    <e-node-annotation content="Custom Template">
+                    </e-node-annotation>
+                </e-node-annotations>
+            </e-node>
+        </e-nodes>
+        <e-connectors>
+            <e-connector id='connector' type='Straight' sourceID='node1' targetID='node2'>
+            </e-connector>
+        </e-connectors>
+    </ejs-diagram>
+-->
+
+<ejs-diagram 
+    #diagram 
+    id="diagram" 
+    width="100%" 
+    height="490px" 
+    [getConnectorDefaults]='connDefaults' 
+    [getNodeDefaults]='nodeDefaults' 
+    [tool]='tool' 
+    [layout]='layout' 
+    [dataSourceSettings]='data' 
+    [snapSettings]='snapSettings'
+    >
+</ejs-diagram>
+
+
+
+<!--
+    <ejs-diagram id="diagram" width="100%" height="580px" [getNodeDefaults]='nodeDefaults' [getConnectorDefaults]='connectorDefaults'>
     <e-nodes>
-        <e-node id='node1' [offsetX]=150 [offsetY]=150>
+        <e-node id='node1' [offsetX]=150 [offsetY]=-150  [shape]='titulo' [rotateAngle]="0">
             <e-node-annotations>
-                <e-node-annotation content="Node1">
-                </e-node-annotation>
+                <e-node-annotation content='Start'></e-node-annotation>
             </e-node-annotations>
         </e-node>
-        <e-node id='node2' [offsetX]=350 [offsetY]=150>
+        <e-node id='node2' [offsetX]=350 [offsetY]=150 [shape]='params'>
             <e-node-annotations>
-                <e-node-annotation content="Custom Template">
-                </e-node-annotation>
+                <e-node-annotation content='params'></e-node-annotation>
+            </e-node-annotations>
+        </e-node>
+        <e-node id='node3' [offsetX]=350 [offsetY]=50 [shape]='description'>
+            <e-node-annotations>
+                <e-node-annotation content='description'></e-node-annotation>
+            </e-node-annotations>
+        </e-node>
+        <e-node id='node4' [offsetX]=350 [offsetY]=250 [shape]='services'>
+            <e-node-annotations>
+                <e-node-annotation content='services'></e-node-annotation>
             </e-node-annotations>
         </e-node>
     </e-nodes>
     <e-connectors>
-        <e-connector id='connector' type='Straight' sourceID='node1' targetID='node2'>
-        </e-connector>
+        <e-connector id='connector1' sourceID='node1' targetID='node2'></e-connector>
+        <e-connector id='connector2' sourceID='node1' targetID='node3'></e-connector>
+        <e-connector id='connector3' sourceID='node1' targetID='node4'></e-connector>
     </e-connectors>
 </ejs-diagram>
+-->
