@@ -3,7 +3,7 @@ import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel,
 import { DataManager } from '@syncfusion/ej2-data';
 
 import { PeticionService} from '../peticion.service';
-import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect } from '@syncfusion/ej2-angular-diagrams';
+import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect, StackPanel, TextElement, VerticalAlignment } from '@syncfusion/ej2-angular-diagrams';
 export interface Farm {
     Name: string;
     Role: string;
@@ -20,82 +20,16 @@ export class PrincipalComponent {
     constructor(private _peticionService:PeticionService){
 
     }
-    /*@ViewChild("diagram")
-    public data: Object[] = this._peticionService.json();
     public diagram: DiagramComponent;
-    public getNodeDefaults(node: NodeModel): NodeModel {
-        let codes: Object = {
-            Principal: "rgb(0, 139,139)",
-            Secundario: "rgb(30, 30,113)",
-            Masinfo: "rgb(0, 100,0)",
-            Otro: "rgb(0, 139,139)"
-        };
-        node.height = 100;
-        node.width = 100;
-        node.style.fill = 'blue'
-        //node.style.fill = codes[(node.data as Farm).Role];;
-        node.style.strokeColor = "White";
-        return node;
-    }
-    ngOnInit(): void {
-    }*/
-    /*@ViewChild("diagram") public layout: LayoutModel;
-    
-    public data: Object[] = this._peticionService.json();
-    public pivot : PointModel;
-    
-    public nodeDefaults(node: NodeModel): NodeModel {
-      let codes: Object = {
-        Principal: "rgb(0, 139,139)",
-        Secundario: "rgb(30, 30,113)",
-        Masinfo: "rgb(0, 100,0)",
-        Otro: "rgb(0, 139,139)"
-      };
-      let lx : Object= {
-          Principal: 'Horizontal',
-          Secundario: 'Vertical'
-      }
-      node.width = 70;
-      node.height = 30;
-      node.annotations = [
-        { content: (node.data as Farm).Name, style: { color: "white" } }
-      ];
-      node.shape ={
-        type: 'Text',
-      };
-      node.style.fill = codes[(node.data as Farm).Role];
-      node.flip = 'Vertical';
-      return node;
-    }
-  
-    public connectorDefaults(connector: ConnectorModel): ConnectorModel {
-      connector.type = "Orthogonal";
-      connector.cornerRadius = 0;
-      return connector;
-    }
-    public dataSourceSettings: DataSourceModel ={
-        id: 'Name', parentId: 'Category', dataManager: new DataManager(this.data as JSON[], new Query().take(7))
-    }
-    ngOnInit(): void {
-      this.layout = {
-        type: 'OrganizationalChart',
-        getLayoutInfo: (node: Node, options: TreeInfo) => {
-            if (!options.hasSubTree) {
-                options.type = 'Right';
-                options.orientation = 'Vertical';
-            }
-        }
-      };
-      this.dataSourceSettings;
-    }
-}*/
     public node: NodeModel;
+    
     public nodeDefaults(node: NodeModel): NodeModel {
         let obj: NodeModel = {};
-        obj.shape = { type: 'Basic', shape: 'Rectangle' };
+        obj.shape = { 
+                        type: 'Basic', 
+                        shape: 'Rectangle',
+                    };
         obj.style = { strokeWidth: 1 };
-        
-        //obj.flip = 'Vertical';
         return obj;
     };
     
@@ -104,10 +38,10 @@ export class PrincipalComponent {
         //binds the external data with node
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
             let codes: Object = {
-                Principal: "rgb(0, 139,139)",
-                Secundario: "rgb(30, 30,113)",
-                Masinfo: "rgb(0, 100,0)",
-                Otro: "rgb(0, 139,139)"
+                Principal: "rgb(33, 181, 115)",
+                Secundario: "rgb(254, 0,113)",
+                Masinfo: "rgb(255, 184, 215)",
+                Otro: "rgb(170, 217, 196)"
             };
             let rota: Object = {
                 Principal: "270"
@@ -131,8 +65,6 @@ export class PrincipalComponent {
     public snapSettings: SnapSettingsModel = { constraints: SnapConstraints.None };
     public layout: Object = {
         type: 'HierarchicalTree',
-            //set layout alignment
-            //bounds: new Rect(100, 0, 500, 500),
             horizontalSpacing: 25,
             verticalSpacing: 30,
             horizontalAlignment: 'Left',
@@ -140,31 +72,51 @@ export class PrincipalComponent {
             orientation: 'LeftToRight'
     };
     /*@ViewChild("diagram")
-    public titulo: FlowShapeModel;
-    public description: FlowShapeModel;
-    public services: FlowShapeModel;
-    //public pivot: PointModel = { x: 0.5, y: 0.5 };
-    public params: FlowShapeModel;
-    public nodeDefaults(node: NodeModel): NodeModel {
-        node.height = 50;
-        node.width = 140;
-        node.flip = 'Vertical';
-        //node.offsetX = 300;
-        //node.rotateAngle = 270;
+    public diagram: DiagramComponent;
+    public offset: PointModel
+    public verticalAlignment: VerticalAlignment
+    public getTextElement(text: string): TextElement {
+        let textElement: TextElement = new TextElement();
+        textElement.width = 50;
+        textElement.height = 20;
+        textElement.content = text;
+        return textElement;
+    };
+
+    public addRows(column: StackPanel) {
+        column.children.push(this.getTextElement('Row1'));
+        column.children.push(this.getTextElement('Row2'));
+        column.children.push(this.getTextElement('Row3'));
+        column.children.push(this.getTextElement('Row4'));
+    };
+    public getNodeDefaults(node: NodeModel): NodeModel {
+        node.height = 100;
+        node.width = 100;
+        node.style.fill = '#6BA5D7';
+        node.style.strokeColor = 'white';
         return node;
     }
-    public connectorDefaults(obj: ConnectorModel): ConnectorModel {
-        obj.type = "Orthogonal";
-        obj.targetDecorator = { shape: "Arrow", width: 10, height: 10 };
-        return obj;
-    }
     ngOnInit(): void {
-        this.titulo = { type: 'Flow', shape: 'Terminator' };
-        this.description = { type: 'Flow', shape: 'Terminator' };
-        this.services = { type: 'Flow', shape: 'Terminator' };
-        this.params = { type: 'Flow', shape: 'Terminator' };
-        //this.segment1 = [{ length: 30, direction: "Right" }, { length: 300, direction: "Bottom" }];
-        //this.segment2 = [{ length: 30, direction: "Left" }, { length: 200, direction: "Top" }];
+        this.verticalAlignment = 'Top';
+        this.offset = {y: 1};
+        this.diagram.setNodeTemplate = (obj: NodeModel, diagram: Diagram): StackPanel => {
+            if (obj.id.indexOf('node1') !== -1) {
+                // It will be replaced with grid panel
+                let table: StackPanel = new StackPanel();
+                table.orientation = 'Horizontal';
+                let column1: StackPanel = new StackPanel();
+                column1.children = [];
+                column1.children.push(this.getTextElement('Column1'));
+                this.addRows(column1);
+                let column2: StackPanel = new StackPanel();
+                column2.children = [];
+                column2.children.push(this.getTextElement('Column2'));
+                this.addRows(column2);
+                table.children = [column1, column2];
+                return table;
+            }
+            return null
+        }
     }*/
 }
 export interface DataInfo {

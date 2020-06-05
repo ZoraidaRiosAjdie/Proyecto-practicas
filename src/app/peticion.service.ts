@@ -6,47 +6,18 @@ import { Injectable } from '@angular/core';
 export class PeticionService {
   public farm: object[] = [
     { 'Name': 'farm1', 'Role': 'Principal'},
-  
     
-    { 'Name': 'params', 'Category': 'farm1', 'Role': 'Secundario'},
-    { 'Name': 'description', 'Category': 'farm1', 'Role': 'Secundario'},
+    { 'Name': 'Global', 'Category': 'farm1', 'Role': 'Secundario'},
+    { 'Name': 'IPDS', 'Category': 'farm1', 'Role': 'Secundario'},
     { 'Name': 'services', 'Category': 'farm1', 'Role': 'Secundario'},
   
-    { 'Name': 'contimeout : 20', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'error414 : Request URI is too long.', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'error500 : An internal server error occurred. Please try again later.",', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'error501 : This method may not be used.', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'error503 : "The service is not available. Please try again later.",', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'httpverb : "MSRPCext",', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'listener : http', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'reqtimeout : 30,', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'resurrectime : 10,', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'rewritelocation : enabled', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'status : up', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'vip : 192.168.1.252', 'Category': 'params','Role': 'Masinfo' },
-    { 'Name': 'vport : 54', 'Category': 'params','Role': 'Masinfo' },
+    { 'Name': 'contimeout : 20 \n error414 : Request URI is too long.\n error500 : An internal server error occurred. Please try again later.\n error501 : This method may not be used.\nerror503 : "The service is not available. Please try again later.\n httpverb : "MSRPCext\n listener : http\n reqtimeout : 30\n resurrectime : 10\n rewritelocation : enabled\n status : up\n vip : 192.168.1.252\n vport : 54', 'Category': 'IPDS','Role': 'Masinfo' },
   
-    { 'Name': 'List farms', 'Category': 'description','Role': 'Masinfo' },
+    { 'Name': 'List farms', 'Category': 'Global','Role': 'Masinfo' },
     
-    { 'Name': 'backends', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'farmguardian : null', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'httpsb : false', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'id : service1', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'leastresp : false', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'persistence', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'redirect', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'redirecttype', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'sessionid', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'ttl : 120', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'urlp', 'Category': 'services', 'Role': 'Masinfo' },
-    { 'Name': 'vhost', 'Category': 'services', 'Role': 'Masinfo' },
-  
-    { 'Name': 'id : 0', 'Category': 'backends', 'Role': 'Otro' },
-    { 'Name': 'ip : 192.168.1.21', 'Category': 'backends', 'Role': 'Otro' },
-    { 'Name': 'port : 50', 'Category': 'backends', 'Role': 'Otro' },
-    { 'Name': 'status : "up', 'Category': 'backends', 'Role': 'Otro' },
-    { 'Name': 'timeout : 1', 'Category': 'backends', 'Role': 'Otro' },
-    { 'Name': 'weight : null', 'Category': 'backends', 'Role': 'Otro' }
+    { 'Name': 'backends: [\nid : 0\nip : 192.168.1.21\nport : 50\nstatus : up\ntimeout : 1\nweight : null\n] \nfarmguardian : null\n httpsb : false\n id : service1\n leastresp : false\n persistence\n redirect\n redirecttype\n sessionid\n ttl : 120\n urlp\n vhost', 'Category': 'services', 'Role': 'Masinfo' },
+
+    
   ];
   /*public farm: object[] = [
     {
