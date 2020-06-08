@@ -4,6 +4,7 @@ import { DataManager } from '@syncfusion/ej2-data';
 
 import { PeticionService} from '../peticion.service';
 import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect, StackPanel, TextElement, VerticalAlignment } from '@syncfusion/ej2-angular-diagrams';
+//import { type } from 'os';
 export interface Farm {
     Name: string;
     Role: string;
@@ -41,17 +42,40 @@ export class PrincipalComponent {
                 Principal: "rgb(33, 181, 115)",
                 Secundario: "rgb(254, 0,113)",
                 Masinfo: "rgb(255, 184, 215)",
+                MasinfoB: "rgb(255, 184, 215)",
                 Otro: "rgb(170, 217, 196)"
             };
             let rota: Object = {
                 Principal: "270"
             };
+            let boton : Object = {
+                MasinfoB : {type: 'HTML',  
+                            content:'<input type="button" value="+"><br><input type="button" value="-">'}, style: { fill : 'rgb(255, 184, 215)'}
+                // Principal : [{id:"Name", height: 00, width: 60, offset: 0.5, template: '<h1>F<br>A<br>R<br>M</h1>' }]
+            };
+            let margin : Object = {
+                Masinfo : { top: 10, left: 10, right: 10, bottom: 10 },
+                Principal : { top: 10, left: 10, right: 10, bottom: 10 },
+                Secundario : { top: 10, left: 10, right: 10, bottom: 10 },
+                MasinfoB : { top: 10, left: 10, right: 10, bottom: 20 },
+                Otro : { top: 10, left: 10, right: 10, bottom: 10 },
+            };
+            let width :Object = {
+                MasinfoB : 80,
+            }
+            let height :Object = {
+                MasinfoB : 80,
+            }
             nodeModel.annotations = [{
-                content: data['Name'], margin: { top: 10, left: 10, right: 10, bottom: 10 },
-                style: { color: 'black' }
+                content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
+                style: { color: 'black' ,
+                        fill: codes[(nodeModel.data as Farm).Role] },
+                //template: boton[(nodeModel.data as Farm).Role]
             }];
-            nodeModel.style = { fill: codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1 };
-            nodeModel.rotateAngle = rota[(nodeModel.data as Farm).Role]
+            nodeModel.style = { fill: codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1};
+            nodeModel.shape =  boton[(nodeModel.data as Farm).Role]
+            // nodeModel.rotateAngle = rota[(nodeModel.data as Farm).Role];
+            // nodeModel.annotations = boton[(nodeModel.data as Farm).Role];
         }
     };
 
@@ -119,6 +143,15 @@ export class PrincipalComponent {
         }
     }*/
 }
+  
+/*export class Default{    
+    rendereComplete() {  
+      //click event for html content  
+      document.getElementById("input").onclick = function () {  
+        alert("button")  
+      }  
+    }  
+}*/
 export interface DataInfo {
     [key: string]: string;
 }

@@ -11,7 +11,7 @@ export class PeticionService {
     { 'Name': 'IPDS', 'Category': 'farm1', 'Role': 'Secundario'},
     { 'Name': 'services', 'Category': 'farm1', 'Role': 'Secundario'},
   
-    { 'Name': 'contimeout : 20 \n error414 : Request URI is too long.\n error500 : An internal server error occurred. Please try again later.\n error501 : This method may not be used.\nerror503 : "The service is not available. Please try again later.\n httpverb : "MSRPCext\n listener : http\n reqtimeout : 30\n resurrectime : 10\n rewritelocation : enabled\n status : up\n vip : 192.168.1.252\n vport : 54', 'Category': 'IPDS','Role': 'Masinfo' },
+    { 'Name': 'contimeout : 20 \n error414 : Request URI is too long.\n error500 : An internal server error occurred. Please try again later.\n error501 : This method may not be used.\nerror503 : "The service is not available. Please try again later.\n httpverb : "MSRPCext\n listener : http\n reqtimeout : 30\n resurrectime : 10\n rewritelocation : enabled\n status : up\n vip : 192.168.1.252\n vport : 54', 'Category': 'IPDS','Role': 'MasinfoB' },
   
     { 'Name': 'List farms', 'Category': 'Global','Role': 'Masinfo' },
     
