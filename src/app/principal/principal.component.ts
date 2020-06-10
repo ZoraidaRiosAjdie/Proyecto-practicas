@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools } from '@syncfusion/ej2-diagrams';
 import { DataManager } from '@syncfusion/ej2-data';
 
+import { VARIABLE} from '../farm/farm';
 import { PeticionService} from '../peticion.service';
-import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect, StackPanel, TextElement, VerticalAlignment } from '@syncfusion/ej2-angular-diagrams';
+import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect, StackPanel, TextElement, VerticalAlignment, LayerModel, PageSettingsModel } from '@syncfusion/ej2-angular-diagrams';
+import { from } from 'rxjs';
 //import { type } from 'os';
 export interface Farm {
     Name: string;
@@ -18,7 +20,8 @@ export interface Farm {
   //encapsulation: ViewEncapsulation.None
 })
 export class PrincipalComponent {
-    public boleano : Boolean = true;
+    public boleano : Boolean;
+    // public layers: LayerModel = { visible : false, lock:false}
     constructor(private _peticionService:PeticionService){
 
     }
@@ -36,7 +39,7 @@ export class PrincipalComponent {
     };
     
     public data: Object = {
-        id: 'Name', parentId: 'Category', dataManager: new DataManager(this._peticionService.json()),
+        id: 'Name', parentId: 'Category' , dataManager: new DataManager(VARIABLE), //visible : false , lock:false,
         //binds the external data with node
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
             let codes: Object = {
@@ -66,25 +69,27 @@ export class PrincipalComponent {
             }
             let height :Object = {
                 MasinfoB : 80,
-            } 
-            /*if (this.boleano == true) {
+            }
+            if (this.boleano == true) {
                 nodeModel.annotations = [{
                     content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
                     style: { color: 'black' ,
-                             fill: codes[(nodeModel.data as Farm).Role] },
-                    template: boton[(nodeModel.data as Farm).Role]
+                             fill: codes[(nodeModel.data as Farm).Role]},
+                    // template: boton[(nodeModel.data as Farm).Role]
                 }];
                 nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1};
                 // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
-            }*/
-            nodeModel.annotations = [{
-                content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
-                style: { color: 'black' ,
-                         fill: codes[(nodeModel.data as Farm).Role] }
-                //template: boton[(nodeModel.data as Farm).Role]
-            }];
-            nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1};
-            nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
+            }
+            else {
+                nodeModel.annotations = [{
+                    content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
+                    style: { color: 'black' ,   
+                            fill: codes[(nodeModel.data as Farm).Role] },
+                    // template: boton[(nodeModel.data as Farm).Role]
+                }];
+                nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1 };
+            }
+            // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
 
             // nodeModel.rotateAngle = rota[(nodeModel.data as Farm).Role];
             // nodeModel.annotations = boton[(nodeModel.data as Farm).Role];
@@ -111,6 +116,27 @@ export class PrincipalComponent {
         this.boleano = valor;
         console.log(valor);
     }
+    /*@ViewChild("diagram")
+    public diagram: DiagramComponent;
+    public sourcePoint: PointModel;
+    public targetPoint: PointModel;
+    public layers: LayerModel;
+    ngOnInit(): void {
+        this.sourcePoint = { x: 100, y: 100 };
+        this.targetPoint = { x: 200, y: 200 };
+        this.layers = [{
+            id: 'layer1',
+            visible: true,
+            objects: ['node1', 'connector'],
+            lock: true
+        },
+        {
+            id: 'layer2',
+            visible: false,
+            objects: ['node2'],
+            lock: false
+        }];
+    }*/
 }
 export interface DataInfo {
     [key: string]: string;
