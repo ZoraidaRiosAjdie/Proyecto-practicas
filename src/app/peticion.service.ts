@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class PeticionService {
   public farm: object[] = [
-    { 'Name': 'farm1', 'Role': 'Principal'},
+    { 'Name': 'f\na\nr\nm\n1', 'Role': 'Principal'},
     
     { 'Name': 'Global', 'Category': 'farm1', 'Role': 'Secundario'},
     { 'Name': 'IPDS', 'Category': 'farm1', 'Role': 'Secundario'},

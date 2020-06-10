@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools } from '@syncfusion/ej2-diagrams';
+import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools, Shape } from '@syncfusion/ej2-diagrams';
 import { DataManager } from '@syncfusion/ej2-data';
 
 import { VARIABLE} from '../farm/farm';
 import { PeticionService} from '../peticion.service';
-import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect, StackPanel, TextElement, VerticalAlignment, LayerModel, PageSettingsModel } from '@syncfusion/ej2-angular-diagrams';
+import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect, StackPanel, TextElement, VerticalAlignment, LayerModel, PageSettingsModel, BasicShape, BasicShapeModel } from '@syncfusion/ej2-angular-diagrams';
 import { from } from 'rxjs';
 //import { type } from 'os';
 export interface Farm {
@@ -21,56 +21,63 @@ export interface Farm {
 })
 export class PrincipalComponent {
     public boleano : Boolean;
-    // public layers: LayerModel = { visible : false, lock:false}
+    /*public layers: LayerModel = {
+        id: 'Name',
+        visible: true,
+        // objects: ['node1', 'connector'],
+        lock: true
+    };*/
     constructor(private _peticionService:PeticionService){
 
     }
     public diagram: DiagramComponent;
     public node: NodeModel;
+    //public drawingshape: BasicShapeModel = //{ type: 'Flow', shape: 'Terminator' };
     
     public nodeDefaults(node: NodeModel): NodeModel {
         let obj: NodeModel = {};
-        obj.shape = { 
-                        type: 'Basic', 
-                        shape: 'Rectangle',
-                    };
+        /*obj.shape = { 
+                        type: 'Flow', 
+                        shape: 'Terminator'
+                    };*/
         obj.style = { strokeWidth: 1 };
         return obj;
     };
-    
     public data: Object = {
-        id: 'Name', parentId: 'Category' , dataManager: new DataManager(VARIABLE), //visible : false , lock:false,
-        //binds the external data with node
+        id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE), 
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
             let codes: Object = {
                 Principal: "rgb(33, 181, 115)",
                 Secundario: "rgb(254, 0,113)",
                 Masinfo: "rgb(255, 184, 215)",
                 MasinfoB: "rgb(255, 184, 215)",
+                MasinfoS1: "rgb(255, 184, 215)",
+                MasinfoS2: "rgb(255, 184, 215)",
+                MasinfoS3: "rgb(255, 184, 215)",
                 Otro: "rgb(170, 217, 196)"
             };
             let rota: Object = {
                 Principal: "270"
             };
             let boton : Object = {
-                MasinfoB : {type: 'HTML',  
-                            content:'<input type="button" value="+" (click)="handleClick(true)"><br><input type="button" value="-" (click)="handleClick(false)">'}, 
-                            style: { fill : 'rgb(255, 184, 215)'}
+                MasinfoS1 : {type: 'HTML',  
+                            content:'<b>Service1</b>'}, 
+                MasinfoS2 : {type: 'HTML',  
+                            content:'<b>Service2</b>'}, 
+                MasinfoS3 : {type: 'HTML',  
+                            content:'<b>Service3</b>'}, 
             };
             let margin : Object = {
-                Masinfo : { top: 10, left: 10, right: 10, bottom: 10 },
+                Masinfo : { top: 30, left: 30, right: 30, bottom: 30 },
                 Principal : { top: 10, left: 10, right: 10, bottom: 10 },
-                Secundario : { top: 10, left: 10, right: 10, bottom: 10 },
-                MasinfoB : { top: 10, left: 10, right: 10, bottom: 20 },
-                Otro : { top: 10, left: 10, right: 10, bottom: 10 },
+                Secundario : { top: 30, left: 30, right: 30, bottom: 30 },
+                MasinfoB : { top: 30, left: 30, right: 30, bottom: 30 },
+                Otro : { top: 30, left: 30, right: 30, bottom: 30 },
             };
-            let width :Object = {
-                MasinfoB : 80,
+            let bold :Object = {
+                Masinfo : true,
             }
-            let height :Object = {
-                MasinfoB : 80,
-            }
-            if (this.boleano == true) {
+            /*if (this.boleano == true) {
                 nodeModel.annotations = [{
                     content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
                     style: { color: 'black' ,
@@ -84,13 +91,20 @@ export class PrincipalComponent {
                 nodeModel.annotations = [{
                     content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
                     style: { color: 'black' ,   
-                            fill: codes[(nodeModel.data as Farm).Role] },
+                            fill: codes[(nodeModel.data as Farm).Role] }
                     // template: boton[(nodeModel.data as Farm).Role]
                 }];
                 nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1 };
-            }
-            // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
-
+            }*/
+            nodeModel.annotations = [{
+                content: data['Name'], margin : margin[(nodeModel.data as Farm).Role],
+                style: { color: 'black' ,   
+                        fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role] },
+                // template: boton[(nodeModel.data as Farm).Role]
+            }];
+            nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1, textAlign: "Left" };
+            nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
+            //nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
             // nodeModel.rotateAngle = rota[(nodeModel.data as Farm).Role];
             // nodeModel.annotations = boton[(nodeModel.data as Farm).Role];
         }
