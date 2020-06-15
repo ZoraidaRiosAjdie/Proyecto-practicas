@@ -1,35 +1,38 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools, Shape } from '@syncfusion/ej2-diagrams';
+import { Component } from "@angular/core";
+/* Estos son los import que nos va a servir para hacer nuestro diagrama llamen a las siguientes clases:
+    - Clase Diagram
+    - Clase NodeModel 
+    - Clase ConnectorModel
+    - Clase SnapConstraints
+    - Clase SnapSettingsModel
+    - Clase DiagramTools
+    - Clase Shape
+*/
+import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools,  } from '@syncfusion/ej2-diagrams';
+/* DataManager : se comunica con la fuente de datos y devuelve el resultado deseado en función de la consulta proporcionada. */
 import { DataManager } from '@syncfusion/ej2-data';
-
-import { VARIABLE} from '../farm/farm';
-import { PeticionService} from '../peticion.service';
-import { TreeInfo, DiagramComponent, FlowShapeModel, OrthogonalSegmentModel, PointModel, Rect, StackPanel, TextElement, VerticalAlignment, LayerModel, PageSettingsModel, BasicShape, BasicShapeModel } from '@syncfusion/ej2-angular-diagrams';
-import { from } from 'rxjs';
-//import { type } from 'os';
+/* Importación de variable */
+import { VARIABLE } from '../farm/farm';
+/* DiagramComponent: importa los componentes de los diagramas */
+import { DiagramComponent } from '@syncfusion/ej2-angular-diagrams';
+/* Aquí he nombrado una interface que luego más a delante me va a servir para darle 
+a cada linea de nuestra lista de objetos con los key de os objetos */
 export interface Farm {
     Name: string;
     Role: string;
     color: string;
 }
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.component.html',
-  styleUrls: ['./principal.component.css'],
-  providers : [PeticionService]
-  //encapsulation: ViewEncapsulation.None
+  styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent {
-    constructor(){}
-    
-    public diagram: DiagramComponent;
-    public node: NodeModel;
-    
-    public nodeDefaults(node: NodeModel): NodeModel {
-        let obj: NodeModel = {};
-        obj.style = { strokeWidth: 1 };
-        return obj;
-    };
+    /* diagram: nos servirá luego en el .html para poner los componentes del diagrama, despues de poner esto 
+    podemos poner el resto de objetos */
+    public diagram: DiagramComponent
+    /*  */
     public data: Object = {
         id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE), 
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
@@ -71,13 +74,11 @@ export class PrincipalComponent {
                 content: data['Name'], margin : margin[(nodeModel.data as Farm).Role],
                 style: { color: 'black' ,   
                         fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role], fontSize: tamaño[(nodeModel.data as Farm).Role]},
-                // template: boton[(nodeModel.data as Farm).Role]
             }];
             nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1, textAlign: "Left" };
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
             // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
-            // nodeModel.rotateAngle = rota[(nodeModel.data as Farm).Role];
-            // nodeModel.annotations = boton[(nodeModel.data as Farm).Role];
+            
         }
     };
 
