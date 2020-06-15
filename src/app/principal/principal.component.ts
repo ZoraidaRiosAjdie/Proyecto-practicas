@@ -20,26 +20,13 @@ export interface Farm {
   //encapsulation: ViewEncapsulation.None
 })
 export class PrincipalComponent {
-    public boleano : Boolean;
-    /*public layers: LayerModel = {
-        id: 'Name',
-        visible: true,
-        // objects: ['node1', 'connector'],
-        lock: true
-    };*/
-    constructor(private _peticionService:PeticionService){
-
-    }
+    constructor(){}
+    
     public diagram: DiagramComponent;
     public node: NodeModel;
-    //public drawingshape: BasicShapeModel = //{ type: 'Flow', shape: 'Terminator' };
     
     public nodeDefaults(node: NodeModel): NodeModel {
         let obj: NodeModel = {};
-        /*obj.shape = { 
-                        type: 'Flow', 
-                        shape: 'Terminator'
-                    };*/
         obj.style = { strokeWidth: 1 };
         return obj;
     };
@@ -51,21 +38,23 @@ export class PrincipalComponent {
                 Secundario: "rgb(254, 0,113)",
                 Masinfo: "rgb(255, 184, 215)",
                 MasinfoB: "rgb(255, 184, 215)",
-                MasinfoS1: "rgb(255, 184, 215)",
-                MasinfoS2: "rgb(255, 184, 215)",
-                MasinfoS3: "rgb(255, 184, 215)",
                 Otro: "rgb(170, 217, 196)"
+            };
+            let tamaño: Object = {
+                Principal: 16,
+                Secundario: 12 ,             
+                Masinfo: 8,
+                MasinfoB: 8,
+                Otro: 6 
             };
             let rota: Object = {
                 Principal: "270"
             };
             let boton : Object = {
-                MasinfoS1 : {type: 'HTML',  
-                            content:'<b>Service1</b>'}, 
-                MasinfoS2 : {type: 'HTML',  
-                            content:'<b>Service2</b>'}, 
-                MasinfoS3 : {type: 'HTML',  
-                            content:'<b>Service3</b>'}, 
+                Secundario1 : {
+                    type:'HTML',
+                    content:"<button (click)='d(true)'>+</button><button (click)='d(false)'>-</button>"
+                }
             };
             let margin : Object = {
                 Masinfo : { top: 30, left: 30, right: 30, bottom: 30 },
@@ -77,34 +66,16 @@ export class PrincipalComponent {
             let bold :Object = {
                 Masinfo : true,
             }
-            /*if (this.boleano == true) {
-                nodeModel.annotations = [{
-                    content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
-                    style: { color: 'black' ,
-                             fill: codes[(nodeModel.data as Farm).Role]},
-                    // template: boton[(nodeModel.data as Farm).Role]
-                }];
-                nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1};
-                // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
-            }
-            else {
-                nodeModel.annotations = [{
-                    content: data['Name'], margin : margin[(nodeModel.data as Farm).Role], 
-                    style: { color: 'black' ,   
-                            fill: codes[(nodeModel.data as Farm).Role] }
-                    // template: boton[(nodeModel.data as Farm).Role]
-                }];
-                nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1 };
-            }*/
+
             nodeModel.annotations = [{
                 content: data['Name'], margin : margin[(nodeModel.data as Farm).Role],
                 style: { color: 'black' ,   
-                        fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role] },
+                        fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role], fontSize: tamaño[(nodeModel.data as Farm).Role]},
                 // template: boton[(nodeModel.data as Farm).Role]
             }];
             nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1, textAlign: "Left" };
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
-            //nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
+            // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
             // nodeModel.rotateAngle = rota[(nodeModel.data as Farm).Role];
             // nodeModel.annotations = boton[(nodeModel.data as Farm).Role];
         }
@@ -126,31 +97,6 @@ export class PrincipalComponent {
             verticalAlignment: 'Top',
             orientation: 'LeftToRight'
     };
-    handleClick(valor: Boolean) {
-        this.boleano = valor;
-        console.log(valor);
-    }
-    /*@ViewChild("diagram")
-    public diagram: DiagramComponent;
-    public sourcePoint: PointModel;
-    public targetPoint: PointModel;
-    public layers: LayerModel;
-    ngOnInit(): void {
-        this.sourcePoint = { x: 100, y: 100 };
-        this.targetPoint = { x: 200, y: 200 };
-        this.layers = [{
-            id: 'layer1',
-            visible: true,
-            objects: ['node1', 'connector'],
-            lock: true
-        },
-        {
-            id: 'layer2',
-            visible: false,
-            objects: ['node2'],
-            lock: false
-        }];
-    }*/
 }
 export interface DataInfo {
     [key: string]: string;
