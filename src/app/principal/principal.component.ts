@@ -41,7 +41,9 @@ export class PrincipalComponent {
         tiene el objetivo de diseñar nuestro diagrama. */
         id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE), 
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
-
+            /* los objetos let nos sirve para que cada rol pueda tener una propiedad 
+            caracteristica, ya que si no las propiedades se tomaran en todo el diagrama */
+            /* Color de los nodos */
             let codes: Object = {
                 Principal: "rgb(33, 181, 115)",
                 Secundario: "rgb(254, 0,113)",
@@ -49,6 +51,7 @@ export class PrincipalComponent {
                 MasinfoB: "rgb(255, 184, 215)",
                 Otro: "rgb(170, 217, 196)"
             };
+            /*Tamaño de letra*/
             let tamaño: Object = {
                 Principal: 20,
                 Secundario: 16 ,             
@@ -56,14 +59,17 @@ export class PrincipalComponent {
                 MasinfoB: 12,
                 Otro: 12 
             };
+            /* Margenes */
             let margin : Object = {
                 MasinfoB : { top: 30, left: 30, right: 30, bottom: 30 },
                 Otro : { top: 10, left: 10, right: 10, bottom: 10 }
             };
+            /* Letras en negrita */
             let bold :Object = {
                 Masinfo : true,
                 Principal: true
             }
+            /* Color de la letra */
             let color :Object = {
                 Principal: 'white',
                 Secundario: 'white',          
@@ -71,15 +77,16 @@ export class PrincipalComponent {
                 MasinfoB: 'black',
                 Otro: 'black'
             }
+            /* Define la descripción textual de nodos/conectores */
             nodeModel.annotations = [{
+                /* Contenido de los nodos */
                 content: data['Name'], margin : margin[(nodeModel.data as Farm).Role],
+                /* Estilo de los nodos, cambiando el color de los nodos el interior del */
                 style: { color: color[(nodeModel.data as Farm).Role],   
                         fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role], fontSize: tamaño[(nodeModel.data as Farm).Role]},
             }];
-            nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1, textAlign: "Left"};
+            nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , textAlign: "Left"};
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
-            // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
-            
         }
     };
 
