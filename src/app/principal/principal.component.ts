@@ -8,7 +8,7 @@ import { Component } from "@angular/core";
     - Clase DiagramTools
     - Clase Shape
 */
-import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools,  } from '@syncfusion/ej2-diagrams';
+import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools, whiteSpaceToString,  } from '@syncfusion/ej2-diagrams';
 /* DataManager : se comunica con la fuente de datos y devuelve el resultado deseado en función de la consulta proporcionada. */
 import { DataManager } from '@syncfusion/ej2-data';
 /* Importación de variable */
@@ -32,10 +32,16 @@ export class PrincipalComponent {
     /* diagram: nos servirá luego en el .html para poner los componentes del diagrama, despues de poner esto 
     podemos poner el resto de objetos */
     public diagram: DiagramComponent
-    /*  */
+    /* DAta: será el objeto que permite que al leer nuestra variable se cree el diagrama , tambien se 
+    encarga de la parte estetica de esta, ademas de su contenido   */
     public data: Object = {
+        /* Aqui empieza a interpretar nuestra variable, cogiendo Name como un nodo, y Category 
+        se encargará de crear los conectores. Tambien podemos ver dataManager el cual se encarga de leer nuetra variable.
+        Por último creamos una función llamasa boBinding que se ejecutara dentro del objeto data, esta función 
+        tiene el objetivo de diseñar nuestro diagrama. */
         id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE), 
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
+
             let codes: Object = {
                 Principal: "rgb(33, 181, 115)",
                 Secundario: "rgb(254, 0,113)",
@@ -44,38 +50,33 @@ export class PrincipalComponent {
                 Otro: "rgb(170, 217, 196)"
             };
             let tamaño: Object = {
-                Principal: 16,
-                Secundario: 12 ,             
-                Masinfo: 8,
-                MasinfoB: 8,
-                Otro: 6 
-            };
-            let rota: Object = {
-                Principal: "270"
-            };
-            let boton : Object = {
-                Secundario1 : {
-                    type:'HTML',
-                    content:"<button (click)='d(true)'>+</button><button (click)='d(false)'>-</button>"
-                }
+                Principal: 20,
+                Secundario: 16 ,             
+                Masinfo: 12,
+                MasinfoB: 12,
+                Otro: 12 
             };
             let margin : Object = {
-                Masinfo : { top: 30, left: 30, right: 30, bottom: 30 },
-                Principal : { top: 10, left: 10, right: 10, bottom: 10 },
-                Secundario : { top: 30, left: 30, right: 30, bottom: 30 },
                 MasinfoB : { top: 30, left: 30, right: 30, bottom: 30 },
-                Otro : { top: 30, left: 30, right: 30, bottom: 30 },
+                Otro : { top: 10, left: 10, right: 10, bottom: 10 }
             };
             let bold :Object = {
                 Masinfo : true,
+                Principal: true
             }
-
+            let color :Object = {
+                Principal: 'white',
+                Secundario: 'white',          
+                Masinfo: 'black',
+                MasinfoB: 'black',
+                Otro: 'black'
+            }
             nodeModel.annotations = [{
                 content: data['Name'], margin : margin[(nodeModel.data as Farm).Role],
-                style: { color: 'black' ,   
+                style: { color: color[(nodeModel.data as Farm).Role],   
                         fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role], fontSize: tamaño[(nodeModel.data as Farm).Role]},
             }];
-            nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1, textAlign: "Left" };
+            nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , strokeColor: '#f5d897', strokeWidth: 1, textAlign: "Left"};
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
             // nodeModel.shape =  boton[(nodeModel.data as Farm).Role];
             

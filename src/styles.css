@@ -1,2 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@syncfusion/ej2-angular-diagrams/styles/material.css";
+@font-face {
+    font-family: fredoka;
+    src: url(./Fredoka_One/FredokaOne-Regular.ttf);
+}
