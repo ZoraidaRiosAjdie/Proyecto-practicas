@@ -6,8 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    public b : boolean = false;
-    d (valor :boolean){
-      this.b = valor;
-    }
+    
 }

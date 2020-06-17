@@ -14,7 +14,9 @@ import { DataManager } from '@syncfusion/ej2-data';
 /* Importación de variable */
 import { VARIABLE } from '../farm/farm';
 /* DiagramComponent: importa los componentes de los diagramas */
-import { DiagramComponent } from '@syncfusion/ej2-angular-diagrams';
+import { DiagramComponent, ScrollSettingsModel } from '@syncfusion/ej2-angular-diagrams';
+import { fail } from 'assert';
+import { disableDebugTools } from '@angular/platform-browser';
 /* Aquí he nombrado una interface que luego más a delante me va a servir para darle 
 a cada linea de nuestra lista de objetos con los key de os objetos */
 export interface Farm {
@@ -29,9 +31,10 @@ export interface Farm {
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent {
+    public b : boolean ;
     /* diagram: nos servirá luego en el .html para poner los componentes del diagrama, despues de poner esto 
     podemos poner el resto de objetos */
-    public diagram: DiagramComponent
+    public diagram: DiagramComponent;
     /* DAta: será el objeto que permite que al leer nuestra variable se cree el diagrama , tambien se 
     encarga de la parte estetica de esta, ademas de su contenido   */
     public data: Object = {
@@ -39,7 +42,7 @@ export class PrincipalComponent {
         se encargará de crear los conectores. Tambien podemos ver dataManager el cual se encarga de leer nuetra variable.
         Por último creamos una función llamasa boBinding que se ejecutara dentro del objeto data, esta función 
         tiene el objetivo de diseñar nuestro diagrama. */
-        id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE), 
+        id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE),
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
             /* los objetos let nos sirve para que cada rol pueda tener una propiedad 
             caracteristica, ya que si no las propiedades se tomaran en todo el diagrama */
@@ -77,16 +80,29 @@ export class PrincipalComponent {
                 MasinfoB: 'black',
                 Otro: 'black'
             }
+            let visible :Object = {         
+                Masinfo: false,
+            }
             /* Define la descripción textual de nodos/conectores */
             nodeModel.annotations = [{
                 /* Contenido de los nodos */
                 content: data['Name'], margin : margin[(nodeModel.data as Farm).Role],
                 /* Estilo de los nodos, cambiando el color de los nodos el interior del */
                 style: { color: color[(nodeModel.data as Farm).Role],   
-                        fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role], fontSize: tamaño[(nodeModel.data as Farm).Role]},
+                        fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role], fontSize: tamaño[(nodeModel.data as Farm).Role]}
+                        
             }];
-            nodeModel.style = { fill : codes[(nodeModel.data as Farm).Role] , textAlign: "Left"};
+            nodeModel.style = { 
+                fill : codes[(nodeModel.data as Farm).Role], 
+                textAlign: "Left"
+            };
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
+            nodeModel.visible = visible[(nodeModel.data as Farm).Role];
+            nodeModel.expandIcon = {
+                shape: 'ArrowDown',
+                width: 10,
+                height: 10
+            }
         }
     };
 
@@ -95,9 +111,8 @@ export class PrincipalComponent {
         connector.style.strokeColor = '#4d4d4d';
         connector.targetDecorator.shape = 'None';
     };
-
     public tool: DiagramTools = DiagramTools.ZoomPan;
-    public snapSettings: SnapSettingsModel = { constraints: SnapConstraints.None };
+    public snapSettings: SnapSettingsModel = { constraints: SnapConstraints.None};
     public layout: Object = {
         type: 'HierarchicalTree',
             horizontalSpacing: 25,
@@ -106,6 +121,9 @@ export class PrincipalComponent {
             verticalAlignment: 'Top',
             orientation: 'LeftToRight'
     };
+    onClick(valor: boolean) { 
+         this.b = valor;
+    } 
 }
 export interface DataInfo {
     [key: string]: string;
