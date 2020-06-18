@@ -80,8 +80,50 @@ export class PrincipalComponent {
                 MasinfoB: 'black',
                 Otro: 'black'
             }
-            let visible :Object = {         
-                Masinfo: false,
+            let despligue :Object = {   
+                Secundario: {
+                    shape: 'ArrowUp',
+                    width: 20,
+                    height: 20,
+                    enablePersistence: 'enable'
+                },          
+                Masinfo: {
+                    shape: 'ArrowUp',
+                    width: 20,
+                    height: 20
+                },
+                MasinfoB: {
+                    shape: 'ArrowUp',
+                    width: 20,
+                    height: 20
+                },
+                Otro: {
+                    shape: 'ArrowUp',
+                    width: 20,
+                    height: 20
+                }
+            }
+            let pliegue :Object = {         
+                Secundario: {
+                    shape: 'ArrowDown',
+                    width: 20,
+                    height: 20
+                },          
+                Masinfo: {
+                    shape: 'ArrowDown',
+                    width: 20,
+                    height: 20
+                },
+                MasinfoB: {
+                    shape: 'ArrowDown',
+                    width: 20,
+                    height: 20
+                },
+                Otro: {
+                    shape: 'ArrowDown',
+                    width: 20,
+                    height: 20,
+                }
             }
             /* Define la descripción textual de nodos/conectores */
             nodeModel.annotations = [{
@@ -97,11 +139,15 @@ export class PrincipalComponent {
                 textAlign: "Left"
             };
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
-            nodeModel.visible = visible[(nodeModel.data as Farm).Role];
-            nodeModel.expandIcon = {
+            nodeModel.collapseIcon ={
                 shape: 'ArrowDown',
-                width: 10,
-                height: 10
+                width: 20,
+                height: 20,
+            }
+            nodeModel.expandIcon = {
+                shape: 'ArrowUp',
+                width: 20,
+                height: 20
             }
         }
     };
