@@ -23,4 +23,3 @@ export const VARIABLE  : Array <any> = [
     { 'Name': 'backends 0 : \n - ip : 192.168.1.21\n - port : 50\n - status : up\n - timeout : 1\n - weight : null\n\nbackends 1 : \n - ip : 192.168.1.21\n - port : 50\n - status : up\n - timeout : 1\n - weight : null', 'Category': 'farmguardian : null\nhttpsb : false\nleastresp : false\n persistence\n redirect\n redirecttype\n sessionid\n ttl : 122\n urlp\n vhost', 'Role': 'Otro' }
        
 ]
-// curl -k -X POST -H 'Content-Type: application/json' -H "ZAPI_KEY: zoraida1630" -d '{"id":"server1"}' https://192.168.1.252:444/zapi/v3/zapi.cgi/farms/farm1/services

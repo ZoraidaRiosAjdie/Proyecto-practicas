@@ -8,7 +8,7 @@ import { Component } from "@angular/core";
     - Clase DiagramTools
     - Clase Shape
 */
-import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools, whiteSpaceToString,  } from '@syncfusion/ej2-diagrams';
+import { Diagram, NodeModel, ConnectorModel, SnapConstraints, SnapSettingsModel, DiagramTools, whiteSpaceToString, Shape,  } from '@syncfusion/ej2-diagrams';
 /* DataManager : se comunica con la fuente de datos y devuelve el resultado deseado en función de la consulta proporcionada. */
 import { DataManager } from '@syncfusion/ej2-data';
 /* Importación de variable */
@@ -80,8 +80,10 @@ export class PrincipalComponent {
                 MasinfoB: 'black',
                 Otro: 'black'
             }
+            /* Despliegue del diagrama */
             let despligue :Object = {   
                 Secundario: {
+                    /* Este shape hara que cuando la flecha este arriba de haga el despliegue */
                     shape: 'ArrowUp',
                     width: 20,
                     height: 20,
@@ -103,8 +105,10 @@ export class PrincipalComponent {
                     height: 20
                 }
             }
+            /* Pliegue del diagrama */
             let pliegue :Object = {         
                 Secundario: {
+                    /* Este shape hara que cuando la flecha este abajo de haga el pliegue */
                     shape: 'ArrowDown',
                     width: 20,
                     height: 20
@@ -127,50 +131,63 @@ export class PrincipalComponent {
             }
             /* Define la descripción textual de nodos/conectores */
             nodeModel.annotations = [{
-                /* Contenido de los nodos */
+                /* Contenido de los nodos y margen de los nodos
+                Importante: el como se puede ver he usado la interfaz que declare al principio llamada Farm, 
+                para hacer que cada objeto de VARIABLE se divida y asi le de el estilo al objeto que tiene el Role,
+                por ello he creado los let de más arriba*/
                 content: data['Name'], margin : margin[(nodeModel.data as Farm).Role],
-                /* Estilo de los nodos, cambiando el color de los nodos el interior del */
+                /* Estilo de los nodos, cambiando el color de los nodos el interior del nodo (fill), de la letra
+                (color), el la alineagición del texto (textAlign), poner la letra en negrita con bold
+                y el tamaño de la letra */
                 style: { color: color[(nodeModel.data as Farm).Role],   
-                        fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', textOverflow: 'Wrap', bold: bold[(nodeModel.data as Farm).Role], fontSize: tamaño[(nodeModel.data as Farm).Role]}
-                        
+                        fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', bold: bold[(nodeModel.data as Farm).Role], 
+                        fontSize: tamaño[(nodeModel.data as Farm).Role]
+                    },
             }];
+            /* El estilo se lo doy para que aparezca fuera del interior de la del recuadro de cada nodo del diagrama*/
             nodeModel.style = { 
-                fill : codes[(nodeModel.data as Farm).Role], 
-                textAlign: "Left"
+                fill : codes[(nodeModel.data as Farm).Role]
             };
+            /* Para que el filo se de la caja quede de forma redondeada */
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
-            nodeModel.collapseIcon ={
-                shape: 'ArrowDown',
-                width: 20,
-                height: 20,
-            }
-            nodeModel.expandIcon = {
-                shape: 'ArrowUp',
-                width: 20,
-                height: 20
-            }
+            /* expandIcon nos servirá el despligue de la cajas */
+            nodeModel.expandIcon = pliegue[(nodeModel.data as Farm).Role];
+            /* Esto nos funcionará para el pliegue de las cajas */
+            nodeModel.collapseIcon = despligue[(nodeModel.data as Farm).Role];
+            /* Tanto el pliegue como el despligue hará que se cree un boton al lado de cada nodo */
+            
         }
     };
-
+    /* Esto nos servirá para los conectores de nuestro diagrama */
     public connDefaults(connector: ConnectorModel): void {
+        /* Los conectores serán de tipo 'Orthogonal' */
         connector.type = 'Orthogonal';
+        /* Tendran el sguiente color */
         connector.style.strokeColor = '#4d4d4d';
+        /* Y no tendrá nungun decorado */
         connector.targetDecorator.shape = 'None';
     };
+    /* DiagramTools nos servirá para el diagrama no se pueda desplazar, si no que el usuario que lo 
+    use pueda desplazarse, es como una foto */
     public tool: DiagramTools = DiagramTools.ZoomPan;
+    /* SnapSettingsModel se ocupa de la cuadricula del fondo, en este caso esta puesta para que no salga */
     public snapSettings: SnapSettingsModel = { constraints: SnapConstraints.None};
+    /* layout se ocupa de la forma del diagrama */
     public layout: Object = {
+        /* En este caso tengo puesta esta forma porque es más flexible a la hora de trabajar con ella 
+        , tambien hay formas más congretas y menos flibles en esta librería */
         type: 'HierarchicalTree',
+        /* Al ser tan flexible este typo de forma nos deja dar espacios tanto verticales colo horicontales 
+        a cada nodo */
             horizontalSpacing: 25,
             verticalSpacing: 30,
-            horizontalAlignment: 'Left',
-            verticalAlignment: 'Top',
+        /* Con la orientacion podemos hacer que los nodos queden de izquierda a derecha, y no como quedan 
+        de forma original que es de arriba a abajo */
             orientation: 'LeftToRight'
-    };
-    onClick(valor: boolean) { 
-         this.b = valor;
-    } 
+    }; 
 }
+/* Esta parte nos servirá para interpretar los datos dados y convertirlos en los objetos necesarios para que los 
+procese la librería */
 export interface DataInfo {
     [key: string]: string;
 }
