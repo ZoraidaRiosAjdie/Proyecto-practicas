@@ -42,7 +42,7 @@ export class PrincipalComponent {
         se encargará de crear los conectores. Tambien podemos ver dataManager el cual se encarga de leer nuetra variable.
         Por último creamos una función llamasa boBinding que se ejecutara dentro del objeto data, esta función 
         tiene el objetivo de diseñar nuestro diagrama. */
-        id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE),
+        id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE), //expanded :false ,
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
             /* los objetos let nos sirve para que cada rol pueda tener una propiedad 
             caracteristica, ya que si no las propiedades se tomaran en todo el diagrama */
@@ -84,50 +84,58 @@ export class PrincipalComponent {
             let despligue :Object = {   
                 Secundario: {
                     /* Este shape hara que cuando la flecha este arriba de haga el despliegue */
-                    shape: 'ArrowUp',
+                    shape: 'Plus',
                     width: 20,
                     height: 20,
-                    enablePersistence: 'enable'
                 },          
                 Masinfo: {
-                    shape: 'ArrowUp',
+                    shape: 'Plus',
                     width: 20,
-                    height: 20
+                    height: 20,
                 },
                 MasinfoB: {
-                    shape: 'ArrowUp',
+                    shape: 'Plus',
                     width: 20,
-                    height: 20
+                    height: 20,
                 },
                 Otro: {
-                    shape: 'ArrowUp',
+                    shape: 'Plus',
                     width: 20,
-                    height: 20
+                    height: 20, 
                 }
             }
             /* Pliegue del diagrama */
             let pliegue :Object = {         
                 Secundario: {
                     /* Este shape hara que cuando la flecha este abajo de haga el pliegue */
-                    shape: 'ArrowDown',
-                    width: 20,
-                    height: 20
-                },          
-                Masinfo: {
-                    shape: 'ArrowDown',
-                    width: 20,
-                    height: 20
-                },
-                MasinfoB: {
-                    shape: 'ArrowDown',
-                    width: 20,
-                    height: 20
-                },
-                Otro: {
-                    shape: 'ArrowDown',
+                    shape: 'Plus',
                     width: 20,
                     height: 20,
+                    visible: false, 
+                },          
+                Masinfo: {
+                    shape: 'Minus',
+                    width: 20,
+                    height: 20,
+                    visible: false, 
+                },
+                MasinfoB: {
+                    shape: 'Minus',
+                    width: 20,
+                    height: 20,
+                    visible: false, 
+                },
+                Otro: {
+                    shape: 'Minus',
+                    width: 20,
+                    height: 20,
+                    visible: false, 
                 }
+            }
+            let visible : Object = {
+                Masinfo: false,
+                MasinfoB: false,
+                Otro: false
             }
             /* Define la descripción textual de nodos/conectores */
             nodeModel.annotations = [{
@@ -143,6 +151,7 @@ export class PrincipalComponent {
                         fill: codes[(nodeModel.data as Farm).Role], textAlign: 'Left', bold: bold[(nodeModel.data as Farm).Role], 
                         fontSize: tamaño[(nodeModel.data as Farm).Role]
                     },
+                // template:'<div><input type="button" value="Submit"></div>'
             }];
             /* El estilo se lo doy para que aparezca fuera del interior de la del recuadro de cada nodo del diagrama*/
             nodeModel.style = { 
@@ -151,11 +160,11 @@ export class PrincipalComponent {
             /* Para que el filo se de la caja quede de forma redondeada */
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
             /* expandIcon nos servirá el despligue de la cajas */
-            nodeModel.expandIcon = pliegue[(nodeModel.data as Farm).Role];
+            // nodeModel.expandIcon = pliegue[(nodeModel.data as Farm).Role];
             /* Esto nos funcionará para el pliegue de las cajas */
-            nodeModel.collapseIcon = despligue[(nodeModel.data as Farm).Role];
+            // nodeModel.collapseIcon = despligue[(nodeModel.data as Farm).Role];
             /* Tanto el pliegue como el despligue hará que se cree un boton al lado de cada nodo */
-            
+            // nodeModel.visible = visible[(nodeModel.data as Farm).Role];
         }
     };
     /* Esto nos servirá para los conectores de nuestro diagrama */
