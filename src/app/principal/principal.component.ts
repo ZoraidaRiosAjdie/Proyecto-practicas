@@ -19,6 +19,7 @@ import { fail } from 'assert';
 import { disableDebugTools } from '@angular/platform-browser';
 /* Aquí he nombrado una interface que luego más a delante me va a servir para darle 
 a cada linea de nuestra lista de objetos con los key de os objetos */
+import { PeticionService } from '../peticion.service';
 export interface Farm {
     Name: string;
     Role: string;
@@ -31,6 +32,9 @@ export interface Farm {
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent {
+    constructor(private _peticionService: PeticionService){
+        console.log(this._peticionService.todo());
+    }
     public b : boolean ;
     /* diagram: nos servirá luego en el .html para poner los componentes del diagrama, despues de poner esto 
     podemos poner el resto de objetos */
@@ -42,7 +46,7 @@ export class PrincipalComponent {
         se encargará de crear los conectores. Tambien podemos ver dataManager el cual se encarga de leer nuetra variable.
         Por último creamos una función llamasa boBinding que se ejecutara dentro del objeto data, esta función 
         tiene el objetivo de diseñar nuestro diagrama. */
-        id: 'Name', parentId: 'Category' , dataManager : new DataManager(VARIABLE), //expanded :false ,
+        id: 'Name', parentId: 'Category' , dataManager : new DataManager(this._peticionService.todo()), //expanded :false ,
         doBinding: (nodeModel: NodeModel, data: DataInfo, diagram: Diagram) => {
             /* los objetos let nos sirve para que cada rol pueda tener una propiedad 
             caracteristica, ya que si no las propiedades se tomaran en todo el diagrama */
@@ -160,9 +164,9 @@ export class PrincipalComponent {
             /* Para que el filo se de la caja quede de forma redondeada */
             nodeModel.shape = { type: 'Flow', shape: 'Terminator' };
             /* expandIcon nos servirá el despligue de la cajas */
-            // nodeModel.expandIcon = pliegue[(nodeModel.data as Farm).Role];
+            nodeModel.expandIcon = pliegue[(nodeModel.data as Farm).Role];
             /* Esto nos funcionará para el pliegue de las cajas */
-            // nodeModel.collapseIcon = despligue[(nodeModel.data as Farm).Role];
+            nodeModel.collapseIcon = despligue[(nodeModel.data as Farm).Role];
             /* Tanto el pliegue como el despligue hará que se cree un boton al lado de cada nodo */
             // nodeModel.visible = visible[(nodeModel.data as Farm).Role];
         }
