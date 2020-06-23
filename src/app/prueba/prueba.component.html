@@ -1,9 +1,7 @@
-<div id="basicDialog" title="Dialog"> 
-    <span id="text"></span> 
-</div> 
-    <ejs-diagram id="diagram" width="100%" height="580px" mode="SVG" [layout]='layout' (itemClick)="onClick($event)" [getConnectorDefaults]='connDefaults' [constraints]='diagramConstraints' [tool]='tool'  >
+
+    <ejs-diagram id="diagram" width="100%" height="580px" mode="SVG" [layout]='layout' [getConnectorDefaults]='connDefaults' [constraints]='diagramConstraints'>
         <e-nodes>
-            <e-node id='node1' [height]=60 [width]=100 [shape]='shape' [style]='style'  >
+            <e-node id='node1' [height]=60 [width]=100 [shape]='shape' [style]='style'  onclick="boton(false)">
                 <e-node-annotations>
                     <e-node-annotation content='{{vari1}}'></e-node-annotation>
                 </e-node-annotations>
