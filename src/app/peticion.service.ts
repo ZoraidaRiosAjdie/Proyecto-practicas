@@ -1,13 +1,5 @@
 import { Injectable } from '@angular/core';
 import { VARIABLE } from './farm/farm1';
-// import { VARIABLES1 } from './farm/service1';
-// import { VARIABLES2 } from './farm/service2';
-// import { VARIABLES3 } from './farm/service3';
-// import { VARIABLES4 } from './farm/serve1';
-// import { VARIABLEB1 } from './farm/backends1';
-// import { VARIABLEB2 } from './farm/backends2';
-// import { VARIABLEB3 } from './farm/backends3';
-// import { VARIABLEB4 } from './farm/backends4';
 @Injectable({
   providedIn: 'root'
 })

@@ -62,15 +62,13 @@ export class PruebaComponent{
   ngOnInit(): void {
     this.shape = { type: "Basic", shape: "Rectangle" };
   }
-  /*onClick(event) { 
-    if (event.elementType == "node") { 
-        document.getElementById("text").innerHTML = 'Hola'; 
-    } 
-  } */
-  public b : boolean = false;
+  myFunction() {
+    document.getElementById("node1").click();
+  }
+  /*public b : boolean = false;
   boton (valor: boolean){
     this.b = valor;
-  }
+  }*/
   public tool: DiagramTools = DiagramTools.ZoomPan;
   public diagramConstraints: DiagramConstraints = DiagramConstraints.Default & ~DiagramConstraints.PageEditable;
 }

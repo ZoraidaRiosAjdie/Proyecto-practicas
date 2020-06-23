@@ -136,7 +136,7 @@ export class PrincipalComponent {
                 let pliegue :Object = {         
                     Secundario: {
                         /* Este shape hara que cuando la flecha este abajo de haga el pliegue */
-                        shape: 'Plus',
+                        shape: 'Minus',
                         width: 20,
                         height: 20,
                         visible: false, 
