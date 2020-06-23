@@ -1,1 +1,39 @@
-<p>prueba works!</p>
+<div id="basicDialog" title="Dialog"> 
+    <span id="text"></span> 
+</div> 
+    <ejs-diagram id="diagram" width="100%" height="580px" mode="SVG" [layout]='layout' (itemClick)="onClick($event)" [getConnectorDefaults]='connDefaults' [constraints]='diagramConstraints' [tool]='tool'  >
+        <e-nodes>
+            <e-node id='node1' [height]=60 [width]=100 [shape]='shape' [style]='style'  >
+                <e-node-annotations>
+                    <e-node-annotation content='{{vari1}}'></e-node-annotation>
+                </e-node-annotations>
+            </e-node>
+            <e-node id='node2' [height]=60 [width]=100 [shape]='shape' [style]='style1' >
+                <e-node-annotations>
+                    <e-node-annotation content='Service'></e-node-annotation>
+                </e-node-annotations>
+            </e-node>
+            <e-node id='node3' [height]=60 [width]=100 [shape]='shape' [style]='style1'>
+                <e-node-annotations>
+                    <e-node-annotation content='Global'></e-node-annotation>
+                </e-node-annotations>
+            </e-node>
+            <e-node id='node4' [height]=60 [width]=100 [shape]='shape' [style]='style1'>
+                <e-node-annotations>
+                    <e-node-annotation content='IPDS'></e-node-annotation>
+                </e-node-annotations>
+            </e-node>
+            <e-node id='node5' [height]=60 [width]=100 [shape]='shape' [style]='style1' >
+                <e-node-annotations>
+                    <e-node-annotation content='{{vari2}}'></e-node-annotation>
+                </e-node-annotations>
+            </e-node>
+        </e-nodes>
+        <e-connectors>
+            <e-connector id='connector1' sourceID='node1' targetID='node2' ></e-connector>
+            <e-connector id='connector2' sourceID='node1' targetID='node3'></e-connector>
+            <e-connector id='connector3' sourceID='node1' targetID='node4'></e-connector>
+            <e-connector id='connector4' sourceID='node2' targetID='node5' ></e-connector>
+        </e-connectors>
+    </ejs-diagram>
+
